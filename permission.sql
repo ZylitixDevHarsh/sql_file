@@ -5,16 +5,6 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `model_has_permissions`;
-CREATE TABLE `model_has_permissions` (
-  `permission_id` bigint(20) unsigned NOT NULL,
-  `model_type` varchar(255) NOT NULL,
-  `model_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
-  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
@@ -137,6 +127,17 @@ INSERT INTO `permissions` (`id`, `name`, `category`, `description`, `is_default`
 (114,	'manage-service-type',	'Configuration',	NULL,	0,	'web',	'2026-07-16 06:30:09',	NULL),
 (115,	'manage-engagement-type',	'Configuration',	NULL,	0,	'web',	'2026-07-16 06:30:09',	NULL),
 (116,	'manage-engagement-model',	'Configuration',	NULL,	0,	'web',	'2026-07-16 06:30:09',	NULL);
+
+
+DROP TABLE IF EXISTS `model_has_permissions`;
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) unsigned NOT NULL,
+  `model_type` varchar(255) NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (

@@ -6,6 +6,34 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE `roles` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `guard_name` varchar(255) DEFAULT 'web',
+  `is_hidden` tinyint(4) DEFAULT 0,
+  `is_default` tinyint(4) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `is_hidden`, `is_default`, `created_at`, `updated_at`) VALUES
+(1,	'admin',	'web',	1,	0,	NULL,	NULL),
+(2,	'User',	'web',	0,	0,	'2020-10-13 14:11:55',	'2025-07-30 02:14:37'),
+(3,	'Supervisor',	'web',	0,	0,	'2020-10-13 14:49:11',	'2025-07-30 02:14:37'),
+(4,	'Manager',	'web',	0,	0,	'2022-06-13 12:54:54',	'2025-07-30 02:14:37'),
+(5,	'Territory Head',	'web',	0,	0,	'2023-10-09 07:00:03',	'2025-07-30 02:14:37'),
+(6,	'Management',	'web',	0,	0,	'2023-10-09 07:00:16',	'2025-07-30 02:14:37'),
+(7,	'HR',	'web',	0,	0,	'2023-10-09 07:00:24',	'2025-07-30 02:14:37'),
+(8,	'Preparer',	'web',	0,	0,	'2024-01-02 10:44:02',	'2025-07-30 02:14:37'),
+(9,	'Finance Team',	'web',	0,	0,	'2024-04-23 09:11:01',	'2025-07-30 02:14:37'),
+(10,	'Tax Manager',	'web',	0,	1,	'2025-07-30 02:14:37',	'2025-07-30 02:14:37'),
+(11,	'BD Manager',	'web',	0,	0,	NULL,	NULL),
+(12,	'BD User',	'web',	0,	0,	'2026-07-16 12:06:41',	'2026-07-16 12:06:41');
+-- 2026-10-01 11:52:02 UTC
+
+
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -138,30 +166,3 @@ CREATE TABLE `model_has_permissions` (
   KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE `roles` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) DEFAULT 'web',
-  `is_hidden` tinyint(4) DEFAULT 0,
-  `is_default` tinyint(4) DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `roles` (`id`, `name`, `guard_name`, `is_hidden`, `is_default`, `created_at`, `updated_at`) VALUES
-(1,	'admin',	'web',	1,	0,	NULL,	NULL),
-(2,	'User',	'web',	0,	0,	'2020-10-13 14:11:55',	'2025-07-30 02:14:37'),
-(3,	'Supervisor',	'web',	0,	0,	'2020-10-13 14:49:11',	'2025-07-30 02:14:37'),
-(4,	'Manager',	'web',	0,	0,	'2022-06-13 12:54:54',	'2025-07-30 02:14:37'),
-(5,	'Territory Head',	'web',	0,	0,	'2023-10-09 07:00:03',	'2025-07-30 02:14:37'),
-(6,	'Management',	'web',	0,	0,	'2023-10-09 07:00:16',	'2025-07-30 02:14:37'),
-(7,	'HR',	'web',	0,	0,	'2023-10-09 07:00:24',	'2025-07-30 02:14:37'),
-(8,	'Preparer',	'web',	0,	0,	'2024-01-02 10:44:02',	'2025-07-30 02:14:37'),
-(9,	'Finance Team',	'web',	0,	0,	'2024-04-23 09:11:01',	'2025-07-30 02:14:37'),
-(10,	'Tax Manager',	'web',	0,	1,	'2025-07-30 02:14:37',	'2025-07-30 02:14:37'),
-(11,	'BD Manager',	'web',	0,	0,	NULL,	NULL),
-(12,	'BD User',	'web',	0,	0,	'2026-07-16 12:06:41',	'2026-07-16 12:06:41');
--- 2026-10-01 11:52:02 UTC
